@@ -1,0 +1,19 @@
+<!-- 차이점 -->
+
+1. BaseEntity
+
+-   원본은 따로 파일 생성
+
+2. DataSource 사용 안해도 되나? typeORM 원본 문서는 사용하던데
+
+3. table column 네이밍 시 대문자는 소문자로 바꿈 (ex. CF_balance -> cf_balance)
+
+4. @OneToMany, @ManyToOne, @OnetoOne 관계 설정 기존대로 안 하고 typeORM 문서보고 작성 -> 차이점이 무엇인가 확인해보자
+
+5. exchangeLog와 user 관계설정 안함
+
+<!-- 개선점 -->
+
+1. Log 테이블에 title(상품명)이 product와 겹침, contact(판매자 연락 링크)와 buyer, seller또한 product 및 user 테이블과 겹침
+
+-   DB 정규화 필요
