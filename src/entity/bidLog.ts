@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Auction } from "./auction";
 
 @Entity("bid_log")
@@ -27,6 +27,7 @@ export class BidLog extends BaseEntity {
     created_at: Date;
 
     @ManyToOne(() => Auction, (auction) => auction.bid_logs)
+    @JoinColumn({ name: "auction_id" })
     auction: Auction;
 
     // @Column({ type: "int", name: "auction_id", default: null, nullable: true })

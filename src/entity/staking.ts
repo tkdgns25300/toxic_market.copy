@@ -123,7 +123,7 @@ export class Staking extends BaseEntity {
     created_at: Date;
 
     @OneToOne(() => User)
-    @JoinColumn()
+    @JoinColumn({ name: "user_address" })
     user: User;
 
     @OneToMany(() => StakingLog, (staking_log) => staking_log.staking)

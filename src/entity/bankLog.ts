@@ -53,5 +53,6 @@ export class BankLog extends BaseEntity {
     remaing_day: number;
 
     @ManyToOne(() => Bank, (bank) => bank.bank_logs)
+    @JoinColumn({ name: "bank_id" })
     bank: Bank;
 }

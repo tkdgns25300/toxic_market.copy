@@ -10,6 +10,8 @@
 
 4. @OneToMany, @ManyToOne, @OnetoOne 관계 설정 기존대로 안 하고 typeORM 문서보고 작성 -> 차이점이 무엇인가 확인해보자
 
+-   JoinColumn은 ManyToOne 관계에 설정. because 테이블 필드 확인을 위해(db diagram)
+
 5. exchangeLog와 user 관계설정 안함
 
 <!-- 개선점 -->

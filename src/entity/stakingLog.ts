@@ -48,6 +48,7 @@ export class StakingLog extends BaseEntity {
     created_at: Date;
 
     @ManyToOne(() => Staking, (staking) => staking.staking_logs)
+    @JoinColumn({ name: "staking_id" })
     staking: Staking;
 
     //   @ManyToOne(() => Staking, (staking) => staking.id, {

@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Raffle } from "./raffle";
 
 @Entity("raffle_log")
@@ -36,6 +36,7 @@ export class RaffleLog extends BaseEntity {
     created_at: Date;
 
     @ManyToOne(() => Raffle, (raffle) => raffle.raffle_logs)
+    @JoinColumn({ name: "raffle_id" })
     raffle: Raffle;
 
     // @ManyToOne(() => Raffle, (raffle) => raffle.id, {
