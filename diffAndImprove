@@ -6,6 +6,8 @@
 
 2. DataSource 사용 안해도 되나? typeORM 원본 문서는 사용하던데
 
+-   DataSource 사용하여 DB 커넥트, 기존에 쓰던 createConnection 메소드는 더 이상 지원하지 않음.
+
 3. table column 네이밍 시 대문자는 소문자로 바꿈 (ex. CF_balance -> cf_balance)
 
 4. @OneToMany, @ManyToOne, @OnetoOne 관계 설정 기존대로 안 하고 typeORM 문서보고 작성 -> 차이점이 무엇인가 확인해보자
