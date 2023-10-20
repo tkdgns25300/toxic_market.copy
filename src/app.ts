@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { AppDataSource } from "../ormconfig";
 import path from "path";
 import { DataSource } from "typeorm";
+import bodyParser from "body-parser";
 
 export class App {
 	public app: express.Application;
@@ -50,7 +51,10 @@ export class App {
 	}
 
 	// Set Middlewares
-	private setMiddlewares(): void {}
+	private setMiddlewares(): void {
+		this.app.use(bodyParser.json({ limit: "20mb" }));
+		this.app.use(bodyParser.urlencoded({ extended: false }));
+	}
 
 	// Start Express Server
 	public async createExpressServer(): Promise<void> {
