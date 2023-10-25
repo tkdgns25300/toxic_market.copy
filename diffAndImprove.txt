@@ -18,6 +18,8 @@
 
 6. app.ts -> Start Express Server 함수에 container, useExpressServer, useSwatter등 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
 
+7. typeDI @Service(), @Inject() 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
+
 <!-- 개선점 -->
 
 1. Log 테이블에 title(상품명)이 product와 겹침, contact(판매자 연락 링크)와 buyer, seller또한 product 및 user 테이블과 겹침
