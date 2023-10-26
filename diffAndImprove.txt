@@ -20,6 +20,13 @@
 
 7. typeDI @Service(), @Inject() 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
 
+8. 원본과 달리 최대한 모든 함수 및 변수에 타입 지정(안정성을 위해)
+
+9. BaseQueryRepo에서 joinArrItem 사용 안함(굳이 사용하는 데가 없어서)
+
+10. createQueryBuilder 방식이 다름
+
+
 <!-- 개선점 -->
 
 1. Log 테이블에 title(상품명)이 product와 겹침, contact(판매자 연락 링크)와 buyer, seller또한 product 및 user 테이블과 겹침
@@ -27,3 +34,10 @@
 - DB 정규화 필요
 
 2. ormconfig.ts 파일 사용해야 하는데 .env파일 config가 ormconfig.ts 파일에서 어려움. 하더라도 코드가 더러워짐.
+
+3. Try/Catch 문 반복됨 -> 반복되는 코드 util로 만들어서 꺼내 쓰면 좋을듯
+
+
+<!-- 확인 -->
+
+1. class-validator 작동 확인

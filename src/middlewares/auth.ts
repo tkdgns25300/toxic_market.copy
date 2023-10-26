@@ -5,7 +5,7 @@ import { User } from "../entity/user";
 dotenv.config();
 
 // Extract AccessToken
-const extractAccessToken = (req: Request) => {
+const extractAccessToken = (req: Request): string => {
 	if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
 		return req.headers.authorization.split(" ")[1];
 	} else {
@@ -14,7 +14,7 @@ const extractAccessToken = (req: Request) => {
 };
 
 // Check Access Token
-export const checkAccessToken = (req: Request, res: Response, next: NextFunction) => {
+export const checkAccessToken = (req: Request, res: Response, next: NextFunction): Response => {
 	try {
 		const token = extractAccessToken(req);
 		const jwtPayload = jwt.verify(token, process.env.JWT_TOKEN_KEY);
@@ -27,7 +27,7 @@ export const checkAccessToken = (req: Request, res: Response, next: NextFunction
 };
 
 // Check Admin Access Token
-export const checkAdminAccessToken = (req: Request, res: Response, next: NextFunction) => {
+export const checkAdminAccessToken = (req: Request, res: Response, next: NextFunction): Response => {
 	try {
 		const token = extractAccessToken(req);
 		const jwtPayload = jwt.verify(token, process.env.JWT_TOKEN_KEY);
@@ -43,7 +43,7 @@ export const checkAdminAccessToken = (req: Request, res: Response, next: NextFun
 };
 
 // Make a Access Token
-export const generateAccessToken = (user: User) => {
+export const generateAccessToken = (user: User): { aud: string; admin: boolean } => {
 	return jwt.sign(
 		{
 			aud: user.public_address,

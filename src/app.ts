@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { AppDataSource } from "../ormconfig";
+import { getDataSource } from "../ormconfig";
 import path from "path";
 import { DataSource } from "typeorm";
 import bodyParser from "body-parser";
@@ -30,17 +30,7 @@ export class App {
 
 	// Set Database Connect
 	private setDatabase(): void {
-		const AppDataSource = new DataSource({
-			type: "mysql",
-			host: process.env.DB_HOST,
-			port: 3306,
-			username: process.env.DB_USER_NAME,
-			password: process.env.DB_PASSWORD,
-			database: process.env.DB_NAME,
-			connectTimeout: 3000,
-			entities: ["src/entity/**/*.{js,ts}"],
-		});
-
+		const AppDataSource = getDataSource();
 		AppDataSource.initialize()
 			.then(() => {
 				console.log("Database Connected successfully");
