@@ -16,9 +16,9 @@
 
 5. exchangeLog와 user 관계설정 안함
 
-6. app.ts -> Start Express Server 함수에 container, useExpressServer, useSwatter등 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
+6. app.ts -> Start Express Server 함수에 container, useSwagger등 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
 
-7. typeDI @Service(), @Inject() 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
+7. typeDI @Service(), @Inject(), @InjectRepository() 등 사용 안함 -> 나중에 어떤 기능인지 확인해보자.
 
 8. 원본과 달리 최대한 모든 함수 및 변수에 타입 지정(안정성을 위해)
 
@@ -36,6 +36,8 @@
 2. ormconfig.ts 파일 사용해야 하는데 .env파일 config가 ormconfig.ts 파일에서 어려움. 하더라도 코드가 더러워짐.
 
 3. Try/Catch 문 반복됨 -> 반복되는 코드 util로 만들어서 꺼내 쓰면 좋을듯
+
+4. user findAll에서 password_hash, nonce삭제하는 코드 뭔가 더러워보임.
 
 
 <!-- 확인 -->

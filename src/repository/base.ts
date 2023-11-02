@@ -1,5 +1,5 @@
 import { getDataSource } from "../../ormconfig";
-import { PageReq } from "../api/request/PageReq";
+import { PageReq } from "../api/request/pageReq";
 
 const dataSource = getDataSource();
 
@@ -11,12 +11,9 @@ export class BaseQueryRepo {
 		this.schemaClassName = schemaClassName;
 	}
 
-	findAll(param: PageReq) {
+	findAll(param: PageReq): Promise<[Array<any>, number]> {
 		return dataSource.manager
-			.createQueryBuilder(
-				this.schemaClassName,
-				this.schemaName,
-			)
+			.createQueryBuilder(this.schemaClassName, this.schemaName)
 			.skip(param.getOffset())
 			.take(param.getLimit())
 			.getManyAndCount();
@@ -24,21 +21,15 @@ export class BaseQueryRepo {
 
 	findOne(whereKey: string, whereValue: string | number) {
 		return dataSource.manager
-			.createQueryBuilder(
-				this.schemaClassName,
-				this.schemaName,
-			)
-			.where(
-				`${this.schemaClassName}.${whereKey} = :${whereKey}`,
-				{
-					[whereKey]: whereValue,
-				},
-			)
+			.createQueryBuilder(this.schemaClassName, this.schemaName)
+			.where(`${this.schemaClassName}.${whereKey} = :${whereKey}`, {
+				[whereKey]: whereValue,
+			})
 			.getOne();
 	}
 
 	create(paramObj: object) {
-		return dataSource
+		return dataSource.manager
 			.createQueryBuilder()
 			.insert()
 			.into(this.schemaClassName)
@@ -46,35 +37,25 @@ export class BaseQueryRepo {
 			.execute();
 	}
 
-	update(
-		paramObj: object,
-		whereKey: string,
-		whereValue: string | number,
-	) {
-		return dataSource
+	update(paramObj: object, whereKey: string, whereValue: string | number) {
+		return dataSource.manager
 			.createQueryBuilder()
 			.update(this.schemaClassName)
 			.set(paramObj)
-			.where(
-				`${this.schemaName}.${whereKey} = :${whereKey}`,
-				{
-					[whereKey]: whereValue,
-				},
-			)
+			.where(`${this.schemaName}.${whereKey} = :${whereKey}`, {
+				[whereKey]: whereValue,
+			})
 			.execute();
 	}
 
 	delete(whereKey: string, whereValue: string | number) {
-		return dataSource
+		return dataSource.manager
 			.createQueryBuilder()
 			.delete()
 			.from(this.schemaClassName)
-			.where(
-				`${this.schemaName}.${whereKey} = :${whereKey}`,
-				{
-					[whereKey]: whereValue,
-				},
-			)
+			.where(`${this.schemaName}.${whereKey} = :${whereKey}`, {
+				[whereKey]: whereValue,
+			})
 			.execute();
 	}
 }

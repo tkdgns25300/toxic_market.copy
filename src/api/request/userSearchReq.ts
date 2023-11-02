@@ -1,5 +1,5 @@
 import { IsOptional, IsString } from "class-validator";
-import { PageReq } from "./PageReq";
+import { PageReq } from "./pageReq";
 
 export class UserSearchReq extends PageReq {
 	@IsString()
@@ -38,6 +38,8 @@ export class UserSearchReq extends PageReq {
 	}
 
 	get getUserCatboticaProject() {
-		return this.user_catbotica_project ? this.user_catbotica_project : "";
+		return this.user_catbotica_project
+			? this.user_catbotica_project
+			: "";
 	}
 }

@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import { getDataSource } from "../ormconfig";
 import path from "path";
-import { DataSource } from "typeorm";
 import bodyParser from "body-parser";
+import { useExpressServer } from "routing-controllers";
+import { routingControllerOptions } from "./util/routingConfig";
 
 export class App {
 	public app: express.Application;
@@ -29,15 +30,22 @@ export class App {
 	}
 
 	// Set Database Connect
-	private setDatabase(): void {
-		const AppDataSource = getDataSource();
-		AppDataSource.initialize()
-			.then(() => {
-				console.log("Database Connected successfully");
-			})
-			.catch((err) => {
-				console.error("Error during Database Connection", err);
-			});
+	private async setDatabase(): Promise<void> {
+		try {
+			const AppDataSource = getDataSource();
+			AppDataSource.initialize()
+				.then(() => {
+					console.log("Database Connected successfully");
+				})
+				.catch((err) => {
+					console.error("Error during Database Connection", err);
+				});
+			// await createConnection().then(() => {
+			// 	console.log("DB Connected successfully");
+			// });
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	// Set Middlewares
@@ -49,6 +57,8 @@ export class App {
 	// Start Express Server
 	public async createExpressServer(): Promise<void> {
 		try {
+			useExpressServer(this.app, routingControllerOptions);
+
 			this.app.listen(4000, () => {
 				console.log("Server Start at 4000 port");
 			});
