@@ -5,6 +5,14 @@ import path from "path";
 import bodyParser from "body-parser";
 import { useExpressServer } from "routing-controllers";
 import { routingControllerOptions } from "./util/routingConfig";
+import Container from "typedi";
+import { UserQueryRepo } from "./repository/user";
+import { UserService } from "./service/user";
+import { UserController } from "./controller/user";
+
+Container.set("UserQueryRepo", new UserQueryRepo());
+Container.set("UserService", new UserService());
+Container.set("UserController", new UserController());
 
 export class App {
 	public app: express.Application;

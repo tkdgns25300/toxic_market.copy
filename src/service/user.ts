@@ -1,4 +1,4 @@
-import { Inject, Service } from "typedi";
+import Container, { Inject, Service } from "typedi";
 import { UserSearchReq } from "../api/request/userSearchReq";
 import { PageResList } from "../api/response/pageResList";
 import { PageResObj } from "../api/response/pageResObj";
@@ -8,7 +8,11 @@ import { UserQueryRepo } from "../repository/user";
 
 @Service()
 export class UserService {
-	constructor(readonly userQueryRepo: UserQueryRepo) {}
+	userQueryRepo: UserQueryRepo;
+
+	constructor() {
+		this.userQueryRepo = Container.get("UserQueryRepo");
+	}
 
 	async findAll(param: UserSearchReq): Promise<PageResList<User>> {
 		const result = await this.userQueryRepo.search(param);

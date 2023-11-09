@@ -6,12 +6,16 @@ import { QueryFailedError } from "typeorm";
 import { PageResObj } from "../api/response/pageResObj";
 import { UserService } from "../service/user";
 import { UserDto } from "../dto";
-import { Inject, Service } from "typedi";
+import Container, { Inject, Service } from "typedi";
 
 @Service()
 @Controller("/user")
 export class UserController {
-	constructor(readonly userService: UserService) {}
+	userService: UserService;
+
+	constructor() {
+		this.userService = Container.get("UserService");
+	}
 
 	@Get("/find")
 	// @UseBefore(checkAdminAccessToken)

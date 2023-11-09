@@ -1,3 +1,4 @@
+import { Service } from "typedi";
 import { getDataSource } from "../../ormconfig";
 import { UserSearchReq } from "../api/request/userSearchReq";
 import { User } from "../entity/user";
@@ -5,6 +6,7 @@ import { BaseQueryRepo } from "./base";
 
 const dataSource = getDataSource();
 
+@Service()
 export class UserQueryRepo extends BaseQueryRepo {
 	constructor() {
 		super("user", "User");
@@ -30,18 +32,11 @@ export class UserQueryRepo extends BaseQueryRepo {
 		}
 
 		if (param.getUserCatboticaProject) {
-			query.andWhere(
-				`catbotica_project = :user_catbotica_project`,
-				{
-					user_catbotica_project:
-						param.getUserCatboticaProject,
-				},
-			);
+			query.andWhere(`catbotica_project = :user_catbotica_project`, {
+				user_catbotica_project: param.getUserCatboticaProject,
+			});
 		}
 
-		return query
-			.skip(param.getOffset())
-			.take(param.getLimit())
-			.getManyAndCount();
+		return query.skip(param.getOffset()).take(param.getLimit()).getManyAndCount();
 	}
 }
